@@ -1,12 +1,10 @@
 <script lang="ts">
 	import Spinner from '$lib/ui/spinner.svelte';
-	import axios from 'axios';
-	import { loginSchema } from './schema';
-	import { invalidateAll, goto } from '$app/navigation';
 	import { applyAction, deserialize } from '$app/forms';
 	
 	import type { ActionData } from './$types';
 	import type { ActionResult } from '@sveltejs/kit';
+	import { goto } from '$app/navigation';
 
 	let loading = false;
 
@@ -34,8 +32,9 @@
 		loading = false;
 	}
 </script>
+
 {#if form?.message}
-	<div class="alert alert-error shadow-lg">
+	<div class="alert alert-error shadow-lg max-w-96 mx-auto">
 		<p>{form.message}</p>
 	</div>
 {/if}

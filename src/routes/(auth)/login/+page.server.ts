@@ -2,6 +2,7 @@ import axios from 'axios';
 import type { Actions } from './$types';
 import { loginSchema } from './schema';
 import { redirect } from '@sveltejs/kit';
+import { env } from '$env/dynamic/private';
 
 export const actions = {
 	default: async (event) => {
@@ -20,8 +21,10 @@ export const actions = {
 			};
 		}
 
+		const url = env.ATHENA_API_URL || 'http://athenapublic.local';
+
 		try {
-			const res = await axios.post('http://athenapublic.local/api/auth/login', {
+			const res = await axios.post(url + '/api/auth/login', {
 				email: parsedData.data.email,
 				senha: parsedData.data.password
 			});
