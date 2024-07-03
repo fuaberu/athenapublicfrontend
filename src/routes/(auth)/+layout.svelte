@@ -5,7 +5,8 @@
 </script>
 
 <div class="relative min-h-screen flex flex-col">
-	<div class="absolute top-3 right-3">
+	<div class="flex justify-between px-3 pt-3">
+		<a href="/">Home</a>
 		<ThemeSwitch isDark={data.theme === 'dark'} />
 	</div>
 	<div class="flex-1 flex flex-col gap-3 justify-center items-center">
