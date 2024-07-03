@@ -45,7 +45,7 @@ export const actions = {
 			}
 
 			return {
-				message: 'Email ou senha inválidos',
+				message: res.data.msg || 'Erro ao logar. Verifique as credenciais informadas',
 				data: parsedData.data
 			};
 		} catch (error) {
