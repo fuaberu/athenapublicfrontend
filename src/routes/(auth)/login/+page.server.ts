@@ -1,7 +1,6 @@
 import axios from 'axios';
 import type { Actions } from './$types';
 import { loginSchema } from './schema';
-import { redirect } from '@sveltejs/kit';
 import { env } from '$env/dynamic/private';
 
 export const actions = {
