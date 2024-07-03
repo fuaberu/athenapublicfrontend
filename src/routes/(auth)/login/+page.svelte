@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Spinner from '$lib/ui/spinner.svelte';
 	import { applyAction, deserialize } from '$app/forms';
-	
+
 	import type { ActionData } from './$types';
 	import type { ActionResult } from '@sveltejs/kit';
 	import { goto } from '$app/navigation';
@@ -9,24 +9,24 @@
 	let loading = false;
 
 	export let form: ActionData;
-	
+
 	async function handleSubmit(event: { currentTarget: EventTarget & HTMLFormElement }) {
 		loading = true;
 		const data = new FormData(event.currentTarget);
-	
+
 		const response = await fetch(event.currentTarget.action, {
 			method: 'POST',
-			body: data,
+			body: data
 		});
-	
+
 		const result: ActionResult = deserialize(await response.text());
-	
+
 		if (result.type === 'success' && result.data) {
-			if(result.data.redirect){
+			if (result.data.redirect) {
 				goto(result.data.redirect);
 			}
-		}  
-	
+		}
+
 		applyAction(result);
 
 		loading = false;
@@ -34,12 +34,16 @@
 </script>
 
 {#if form?.message}
-	<div class="alert alert-error shadow-lg max-w-96 mx-auto">
+	<div class="alert alert-error mx-auto max-w-96 shadow-lg">
 		<p>{form.message}</p>
 	</div>
 {/if}
 
-<form on:submit|preventDefault={handleSubmit} method="POST" class="w-full max-w-96 mx-auto p-2 space-y-2">
+<form
+	on:submit|preventDefault={handleSubmit}
+	method="POST"
+	class="mx-auto w-full max-w-96 space-y-2 p-2"
+>
 	<h1 class="text-center text-3xl">Login</h1>
 	<div class="form-control w-full">
 		<label for="email" class="label">
@@ -77,7 +81,7 @@
 	</div>
 	<div class="form-control w-full">
 		<label class="label cursor-pointer justify-start space-x-4">
-			<input type="checkbox" name="remember" class="checkbox checkbox-primary" />
+			<input type="checkbox" name="remember" class="checkbox-primary checkbox" />
 			<span class="label-text">Lembrar de mim</span>
 		</label>
 	</div>
